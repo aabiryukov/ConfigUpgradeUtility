@@ -1,0 +1,12 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+
+	<x:settings overwriteVersion='all'/>
+	<!-- Info: No migration changes.-->
+	<x:migration>
+		<!--WARNING: Not found value of key attribute in migration source. KeyName=key, NodeName=multiNotChangeSection-->
+		<x:migrateNodesSelect sel="/configuration/sectionGroup1/multiNotChangeSection" key="key">
+			<x:migrateNodes sel="myNode"/>
+		</x:migrateNodesSelect>		
+	</x:migration>
+
+</x:upgrade>

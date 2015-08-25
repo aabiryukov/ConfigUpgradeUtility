@@ -1,0 +1,17 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+
+	<x:settings overwriteVersion='all'/>
+
+	<x:migration>
+		<x:migrateNodes sel='/configuration/appSettings/add' key='key'/>
+	</x:migration>
+
+	<x:patches>
+		<x:patch targetVersion="all">
+			<x:replaceText sel="/configuration/appSettings/add[@key='TestReplace1']/@value" oldText="Раз" newText="РАЗЗ" />
+			<x:replaceText sel="/configuration/appSettings/add[@key='TestReplace2']/@value" oldText="one" newText="onee" ignoreCase="true" />
+			<x:replaceText sel="/configuration/appSettings/add[@key='TestReplace2']/@value" oldText=" три" newText="" ignoreCase="true" />
+		</x:patch>
+	</x:patches>
+	
+</x:upgrade>

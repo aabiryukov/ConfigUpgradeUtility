@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+	<appSettings>
+		<add key="MySetting1" value="My Setting 111 (erase)" />
+		<add key="MySetting3" value="My Setting 333 (erase)" />
+	</appSettings>
+	
+</configuration>

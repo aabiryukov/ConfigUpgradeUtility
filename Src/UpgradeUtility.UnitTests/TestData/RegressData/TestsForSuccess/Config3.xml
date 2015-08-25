@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<sectionGroup1>
+		<multiSection masterkey="1">
+			<myNode>aaaa</myNode>
+		</multiSection>
+		<multiSection masterkey="2">
+			<myNode>bbb</myNode>
+		</multiSection>
+		<multiSection masterkey="3" node="1">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+		<multiSection masterkey="3" node="2">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+		<multiSection masterkey="4">
+			<myNode key="1">ccc</myNode>
+			<myNode key="2">ccc</myNode>
+			<myNode key="3">ccc</myNode>
+		</multiSection>
+		<multiSection masterkey="">
+			<myNode>bbb</myNode>
+		</multiSection>
+		
+		<migrateSection>
+			<myNode>bbb</myNode>
+		</migrateSection>
+		<migrateNotExistNode>a</migrateNotExistNode>
+		<migrateNode value="migrateNode"/>
+	</sectionGroup1>
+
+	<appSettings>
+		<add key="Path" value="C:\temp\русский.txt" />
+		<add key="TestReplace1" value="One Two Tree, Раз Два Три and ONE TWO TREE и РАЗ ДВА ТРИ" />
+		<add key="TestReplace2" value="One Two Tree, Раз Два Три and ONE TWO TREE и РАЗ ДВА ТРИ" />
+	</appSettings>
+	
+</configuration>

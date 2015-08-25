@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	
+	<appSettings>
+		<add key="MySetting1" value="My Setting 1" />
+		<add key="MySetting2" value="My Setting 2 (keep)" />
+		<add key="MySetting3" value="My Setting 3" />
+	</appSettings>
+	
+</configuration>

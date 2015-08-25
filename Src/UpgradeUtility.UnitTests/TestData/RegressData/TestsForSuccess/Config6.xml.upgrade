@@ -1,0 +1,11 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+
+	<x:settings overwriteVersion='all'/>
+
+	<x:migration>
+		<x:migrateNodes sel='/configuration/appSettings/add' key='key'/>
+		<x:keepNode selParent='/configuration/appSettings' selNode="add[@key='MySetting2']"/>
+		<x:keepNode selParent='/configuration/appSettings' selNode="../add[@key='MySetting2']"/>
+	</x:migration>
+	
+</x:upgrade>

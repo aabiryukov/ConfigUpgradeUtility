@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<configuration>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0,Profile=Client"/>
+  </startup>
+
+  <appSettings>
+    <add key="Setting1" value="Default"/>
+
+    <add key="Setting2" value="0"/>
+
+    <!-- Setting3 removed in the new config-->
+
+    <!-- New Setting4 added in the new config-->
+    <add key="Setting4" value="New setting"/>
+  </appSettings>
+
+</configuration>

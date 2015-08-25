@@ -1,0 +1,17 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility'>
+	<x:settings overwriteVersion="" />
+
+	<x:patches>
+		<x:patch targetVersion="0-100">
+			
+			<x:add sel="/log4net/root/appender-ref[@ref='FileAppender']" verify="/dummy" pos="after">
+				<appender-refX ref="FileAppender"/>
+			</x:add>
+
+			<x:add sel="/log4net/root2/appender-ref[@ref='FileAppender']" verify="/dummy" pos="after">
+				<appender-ref ref="FileAppender"/>
+			</x:add>
+
+		</x:patch>
+	</x:patches>
+</x:upgrade>

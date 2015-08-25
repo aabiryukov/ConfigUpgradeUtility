@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://sitronics.com/Test1">
+	<sectionGroup1>
+		<multiSection masterkey="1">
+			<myNode>aaaa<xxx>Ok</xxx></myNode>
+		</multiSection>
+		<multiSection masterkey="2">
+			<myNode>bbb</myNode>
+		</multiSection>
+		<multiSection masterkey="3">
+			<myNode>ccc</myNode>
+			<myNode1>33333</myNode1>
+		</multiSection>
+		<multiSection masterkey="4">
+			<myNode key="1">TestTransfer</myNode>
+			<myNode key="2">222</myNode>
+			<myNode key="3">333</myNode>
+		</multiSection>
+		<migrateSection>
+			<myNode>bbb</myNode>
+		</migrateSection>
+		<migrateSection2>
+			<myNode>bbb</myNode>
+		</migrateSection2>
+		<migrateSection3 masterkey="1">
+			<myNode>aaaa</myNode>
+			<myNode>bbb</myNode>
+		</migrateSection3>
+		<migrateSection3 masterkey="1">
+			<myNode>aaaa</myNode>
+			<myNode>bbb</myNode>
+		</migrateSection3>
+		<migrateNode value="migrateNode" />
+		<migrateNotChangeNode value="NoChange" />
+		<migrateMultiNode masterkey="1" value="1" />
+		<migrateMultiNode masterkey="2" value="2" />
+		<migrateMultiNode masterkey="3" value="3" />
+		<TransferTest1 title1="Text for title1" title2="Text for title2" title3="MUST BE LIVE">
+			<myNode>Александр Пушкин</myNode>
+			<myNode>Толстой</myNode>
+			<myNode>Чехов</myNode>
+			<items>
+				<item data="1" />
+				<item data="2" />
+				<item data="3" />
+			</items>
+		</TransferTest1>
+		<TransferTest222>
+			<Speeed>
+				<vox data="1" />
+				<vox data="2" />
+				<vox data="3" />
+			</Speeed>
+			<myNode>Ferrari</myNode>
+			<myNode>McLaren</myNode>
+			<myNode>Turbo</myNode>
+		</TransferTest222>
+	</sectionGroup1>
+	<appSettings>
+		<add key="TestKey" value="1" />
+		<add key="ExistKey" value="true" />
+		<!-- Refresh Time = 10 min-->
+		<add key="RefreshTime" value="10" />
+	</appSettings>
+	<system.serviceModel>
+		<services>
+			<service name="Marti.Core.Metadata.XmlMetadataProvider" behaviorConfiguration="SimpleBehavior">
+				<host>
+					<baseAddresses>
+						<add baseAddress="http://localhost:9112/MetadataStore" />
+					</baseAddresses>
+				</host>
+				<endpoint binding="basicHttpBinding" bindingConfiguration="basicHttpDefaultBinding" contract="IMetadataStore" />
+				<endpoint address="mex" binding="mexHttpBinding" contract="IMetadataExchange" />
+			</service>
+			<service name="Marti.Core.Dictionary.DictionaryCache" behaviorConfiguration="SimpleBehavior">
+				<host>
+					<baseAddresses>
+						<add baseAddress="http://msk-app-0839:9112/DictionaryStore" />
+					</baseAddresses>
+				</host>
+				<endpoint binding="basicHttpBinding" bindingConfiguration="basicHttpDefaultBinding" contract="IDictionaryStore" />
+				<endpoint address="mex" binding="mexHttpBinding" contract="IMetadataExchange" />
+			</service>
+		</services>
+		<client>
+			<endpoint address="http://localhost:9112/MetadataStore" binding="basicHttpBinding" bindingConfiguration="basicHttpDefaultBinding" contract="IMetadataStore" />
+		</client>
+	</system.serviceModel>
+</configuration>

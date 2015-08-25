@@ -1,0 +1,121 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+	<!-- 
+************************************************************************
+	File upgrade rules
+************************************************************************
+-->
+
+	<!-- File upgrade main settings -->
+	<!-- * overwriteVersion - Verson ranges of old intaller, in that file need be overwritten -->
+	<!-- * fileFormat - target file format. Optional, by default: xml. Allowed values: xml. -->
+	<x:settings
+		overwriteVersion='all'
+		fileFormat='xml'
+	>
+		<x:namespaces>
+			<x:namespace prefix='t' uri='http://sitronics.com/Test1'/>
+		</x:namespaces>
+	</x:settings>
+
+	<!-- Nodes migration rules (from old file to new) -->
+	<x:migration>
+
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:multiSection" key="masterkey">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+		<!-- Миграция в несуществующую ноду 
+			WARNING: Not found nodes by key in target. XPath=/t:configuration/t:sectionGroup1/t:NotExistMultiSection[@masterkey='1']
+			WARNING: Not found nodes by key in target. XPath=/t:configuration/t:sectionGroup1/t:NotExistMultiSection[@masterkey='2']-->
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:NotExistMultiSection" key="masterkey">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:migrateSection2">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+
+		<!-- Не существует key="key" 
+		WARNING: Not found value of key attribute in migration source. KeyName=key, NodeName=myNode -->
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:multiSection" key="key">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+		
+		<!-- WARNING: Not found value of key attribute in migration source. KeyName=masterkey, NodeName=multiSection-->
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:multiSection" key="masterkey">
+			<x:migrateNodesSelect sel="t:myNode" key="key">
+				<x:migrateNodes sel="t:myNode"/>
+			</x:migrateNodesSelect>
+		</x:migrateNodesSelect>
+
+		<x:migrateNodes sel="/t:configuration/t:sectionGroup1/t:migrateSection"/>
+
+		<x:migrateNodes sel="/t:configuration/t:sectionGroup1/t:migrateNode"/>
+
+		<!-- Миграция в несуществующую ноду 
+		 Info: Target nodes '/t:configuration/t:sectionGroup1/t:migrateNotExistNode' not found. -->
+		<x:migrateNodes sel="/t:configuration/t:sectionGroup1/t:migrateNotExistNode"/>
+
+		<x:migrateNodes sel="/t:configuration/t:sectionGroup1/t:migrateNotChangeNode/@value"/>
+
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1">
+			<x:migrateNodes sel="t:migrateMultiNode" key="masterkey"/>
+		</x:migrateNodesSelect>
+		
+		<!-- Несколько migrateSection3 с одинаковым masterkey
+		WARNING: Found multiple nodes by key in target. Key must be unique.-->
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:migrateSection3" key="masterkey">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+
+	</x:migration>
+
+	<x:patches>
+		<x:patch targetVersion="0-7.15.123.0">
+			<x:add sel="/t:configuration/t:appSettings" verify="/t:configuration/t:appSettings/t:add[@key='RefreshTime']">
+				<!-- Refresh Time = 10 min-->
+				<add key="RefreshTime" value="10" />
+			</x:add>
+		</x:patch>
+
+		<x:patch targetVersion="0-9.9.9.9">
+			
+			<x:replace sel="/t:configuration/t:system.serviceModel/t:services/t:service[@name='Marti.Core.Dictionary.DictionaryCache']/t:host/t:baseAddresses/t:add/@baseAddress">
+				http://$(MsiProperty.ComputerName):9112/DictionaryStore
+			</x:replace>
+
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:multiSection[@masterkey='3']/t:myNode2"
+				targetSel="/t:configuration/t:sectionGroup1/t:multiSection[@masterkey='4']/t:myNode[@key='1']"
+				/>
+
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:TransferTest1"
+				targetSel="/t:configuration/t:sectionGroup1/t:TransferTest1"
+				/>
+
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:TransferTest2"
+				targetSel="/t:configuration/t:sectionGroup1/t:TransferTest222"
+				/>
+
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:TransferTestOld/@title"
+				targetSel="/t:configuration/t:sectionGroup1/t:TransferTest1/@title1"
+				/>
+
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:TransferTestOld"
+				targetSel="/t:configuration/t:sectionGroup1/t:TransferTest1/@title2"
+				/>
+
+			<!-- Must me waring -->
+			<x:transferValue
+				sourceSel="/t:configuration/t:sectionGroup1/t:NodeNotExists"
+				targetSel="/t:configuration/t:sectionGroup1/t:TransferTest1/@title2"
+				/>
+
+		</x:patch>
+
+	</x:patches>
+
+</x:upgrade>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<configSections>
+		<section name="remoteWellKnownObjects"/>
+	</configSections>
+	<sectionGroup1>
+		<multiSection masterkey='1'>
+			<myNode>aaaa</myNode>
+		</multiSection>
+		<multiSection masterkey='2'>
+			<myNode>bbb</myNode>
+		</multiSection>
+		<multiSection masterkey='3'>
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+
+		<migrateSection>
+			<myNode>bbb</myNode>
+		</migrateSection>
+
+		<migrateNode value='migrateNode'/>
+	</sectionGroup1>
+
+	<appSettings>
+		<add key='ConnectionName' value='' overwritevalue="false"/>
+		<add key="MaxThreadCount" value="100"/>
+		<add key="TestKey" value="1" />
+		<add key="ExistKey" value="true" />
+		<add key="EmptyKey" value="" />
+	</appSettings>
+
+	<system.web>
+		<httpRuntime maxRequestLength="65536" delayNotificationTimeout="20"/>
+		<trace enabled="false" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true"/>
+		<!--  SESSION STATE SETTINGS
+		     StateServer session mode, need change 127.0.0.1 to state server address   -->
+		<sessionState mode="StateServer" stateConnectionString="tcpip=change_to_state_server_name:42424" cookieless="AutoDetect" timeout="20" />
+	</system.web>
+
+</configuration>

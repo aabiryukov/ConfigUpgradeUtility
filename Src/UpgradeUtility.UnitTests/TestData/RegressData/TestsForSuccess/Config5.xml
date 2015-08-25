@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<log4net xsi:noNamespaceSchemaLocation="http://csharptest.net/downloads/schema/log4net.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<root>
+		<level value="DEBUG"/>
+		<appender-ref ref="FileAppender" x="11"/>
+		<x />
+		<y />
+		<z />
+		<appender-ref ref="ConsoleAppender"/>
+		<appender-ref ref="TraceAppender"/>
+		<appender-ref ref="FileAppender" x="22"/>
+		<x />
+		<y />
+		<z />
+	</root>
+
+	<root2>
+		<level value="DEBUG"/>
+		<appender-ref ref="FileAppender" x="11"/>
+		<x />
+		<y />
+		<z />
+		<appender-ref ref="ConsoleAppender"/>
+		<appender-ref ref="TraceAppender"/>
+		<appender-ref ref="FileAppender" x="22"/>
+		<x />
+		<y />
+		<z />
+	</root2>
+
+	<logger name="Spring" additivity="false">
+		<level value="OFF"/>
+	</logger>
+	<logger name="DealerPortal.DataLayer.Repositories.RepositoryBase" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Localization.RazorTemplate" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Localization.ILocalizedStringRepository.FindAll" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Fields.IFieldSettingRepository.FindByCode" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Fields.IFieldFactory.GetFieldConfiguration" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Fields.IFieldFactory.CreateField" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Bpc.IBpcService.GetContainer" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Fields.IFieldSettingRepository.FindUpdatedFrom" additivity="false">
+		<level value="OFF" />
+	</logger>
+	<logger name="DealerPortal.Domain.Model.Localization.ILocalizedStringRepository.FindUpdatedFrom" additivity="false">
+		<level value="OFF" />
+	</logger>
+
+	<appender name="FileAppender" type="log4net.Appender.RollingFileAppender">
+		<file value="c:\FORISLOG\DealerPortal\back-end-all.log"/>
+		<appendToFile value="true"/>
+		<rollingStyle value="Size"/>
+		<maximumFileSize value="10000KB"/>
+		<staticLogFileName value="true"/>
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date (%level) %logger%n--------------------------------------------------%n%message%n%n"/>
+		</layout>
+	</appender>
+
+	<appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date (%level) %logger%n--------------------------------------------------%n%message%n%n"/>
+		</layout>
+		<filter type="log4net.Filter.LevelRangeFilter">
+			<levelMin value="INFO" />
+			<levelMax value="FATAL" />
+		</filter>
+	</appender>
+
+	<appender name="TraceAppender" type="log4net.Appender.TraceAppender">
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date (%level) %logger%n--------------------------------------------------%n%message%n%n"/>
+		</layout>
+	</appender>
+
+</log4net>

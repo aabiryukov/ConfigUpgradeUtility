@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+<!-- 
+************************************************************************
+	File upgrade rules
+************************************************************************
+-->
+	
+	<!-- File upgrade main settings -->
+	<!-- * overwriteVersion - Verson ranges of old intaller, in that file need be overwritten -->
+	<!-- * fileFormat - target file format. Optional, by default: xml. Allowed values: xml. -->
+	<x:settings 
+		overwriteVersion='all'
+		fileFormat='xml'
+	>
+		<x:namespaces>
+			<x:namespace prefix='t' uri='http://sitronics.com/Test1'/>
+		</x:namespaces>
+	</x:settings>
+
+		<!-- Nodes migration rules (from old file to new) -->
+	<x:migration>
+		<!--x:migrateNodes sel="/configuration/system.web/identity" deep="true"/>
+		<x:migrateNodes sel="/configuration/appSettings/add" key="key"/-->
+		<x:migrateNodes sel="/t:configuration/t:appSettings/t:add[@key='FORIS.TelCRM.BMS.AssignToCampaignQueue']" />
+
+		<x:migrateNodesSelect sel="/t:configuration/t:appSettings" >
+			<x:migrateNodes sel="t:add[@key='AttributeMigration2']" />
+		</x:migrateNodesSelect>
+
+		<x:migrateNodesSelect sel="/t:configuration/t:sectionGroup1/t:section" key="masterkey">
+			<x:migrateNodes sel="t:myNode"/>
+		</x:migrateNodesSelect>
+
+		<x:migrateNodes sel="/t:configuration/t:appSettings/t:add[@key='AttributeMigration']/@value" />
+	</x:migration>
+
+	<!-- File patches -->
+	<x:patches>
+		
+<!--  See patch examples on: http://validate.openlaboratory.net/patch/ -->
+
+		<x:patch targetVersion="0-7.15.123.0">
+
+			<x:replaceText sel="/t:configuration/t:test" oldText="123" newText="321" />
+
+			<x:replace sel="/t:configuration/t:appSettings/t:add[@key='Node1']/@value">Value2</x:replace>
+			
+			<x:remove sel="/t:configuration/t:ajaxNet/t:ajaxSettings/t:urlNamespaceMappings/t:add[starts-with(@namespace, 'FORIS.TelCRM.RequestManagement')]"/>
+			
+			<!-- do nothing -->
+			<x:remove sel="*/foo[1]"/>
+
+			<!-- add new nodes to appSettings -->
+			<x:add sel="/t:configuration/t:appSettings" verify="/t:configuration/t:appSettings/t:add[@key='RefreshTime']">
+				<!-- test message 222 -->
+				<add key="TestMsiProperty" value="$(MsiProperty.AppDataFolder)" />
+				<add key="RefreshTime" value="10" />
+				<add key="MaxThreadCount" value="20" />
+				<add key="ConnectionName" value="FORIS.FORIS_Mobile.TaskScheduler"/>
+				<add key="NodeReplace0" value="000"/>
+				<add key="NodeReplace1" value="111"/>
+
+				<!-- Node for delete-->
+				<add key="AttributeMustDeleted" value="Attribute 'value' will be removed bellow"/>
+				<add key="NodeMustDeleted" value="This node will be removed bellow"/>
+			</x:add>
+			
+			<x:remove sel="/t:configuration/t:system.web/t:trace"/>
+			<x:remove sel="*/t:appSettings/t:add[@key='AttributeMustDeleted']/@value"/>
+
+			<x:replace sel="*/t:appSettings/t:add[@key='ConnectionName']/@value">Super Connection</x:replace>
+			<x:replace sel="*/t:appSettings/t:add[@key='MaxThreadCount']/@value" vital="true">300</x:replace>
+			<x:replace sel="*/t:appSettings/t:add[@key='NodeReplace1']">
+				<add key="NodeReplace2" value="222"/>
+			</x:replace>
+
+			<x:add sel="*/appSettings/t:add[1]" pos="before" verify="*/t:appSettings/t:add[@key='RefreshTime2']">
+				<add key="RefreshTime2" value="10" />
+			</x:add>
+
+			<x:addAttribute
+				sel="/t:configuration/t:appSettings/t:add"
+				name="ex"
+				value="ok"
+			/>
+
+		</x:patch>
+	</x:patches>
+
+</x:upgrade>

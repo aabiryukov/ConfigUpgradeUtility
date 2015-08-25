@@ -1,0 +1,10 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility'>
+
+	<x:settings overwriteVersion='all'/>
+
+	<x:migration>
+    <!-- Migrate all appSettings values from old config to new by key attribute with name 'key' -->
+		<x:migrateNodes sel='/configuration/appSettings/add' key='key'/>
+	</x:migration>
+	
+</x:upgrade>

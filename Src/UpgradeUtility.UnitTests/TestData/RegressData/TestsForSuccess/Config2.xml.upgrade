@@ -1,0 +1,113 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+	<!-- 
+************************************************************************
+	File upgrade rules
+************************************************************************
+-->
+
+	<!-- File upgrade main settings -->
+	<!-- * overwriteVersion - Verson ranges of old intaller, in that file need be overwritten -->
+	<!-- * fileFormat - target file format. Optional, by default: xml. Allowed values: xml. -->
+	<x:settings overwriteVersion=''	fileFormat='xml'/>
+
+
+	<x:patches>
+		<x:patch targetVersion="0-1.2.0">
+			<!-- Добавить в секцию «appSettings» настройки, если в этой секции нет настройки <add key="RefreshTime"/> -->
+			<x:add sel="/configuration/appSettings" verify="/configuration/appSettings/add[@key='RefreshTime']">
+				<add key="RefreshTime" value="2" />
+				<add key="Period" value="120"/>
+				<add key="PerformanceCountersEnable" value="false" />
+				<add key="PerformanceCountersResetTimer" value="60" />
+				<add key="PerformanceCountersLogDirname" value="C:/PCLOG" />
+			</x:add>
+
+			<x:add sel="/configuration/appSettings/add[@key='RefreshTime']" pos="after" 
+				   verify="/configuration/appSettings/add[@key='AfterRefreshTime']">
+				<add key="AfterRefreshTime" value="3" />
+			</x:add>
+
+			<x:add sel="/configuration/appSettings/add[@key='RefreshTime']" pos="before"
+				   verify="/configuration/appSettings/add[@key='BeforeRefreshTime']">
+				<add key="BeforeRefreshTime" value="1" />
+			</x:add>
+
+			<!-- Настройка не добавляется, уже существует -->
+			<x:add sel="/configuration/appSettings" verify="configuration/appSettings/add[@key='ExistKey']">
+				<add key="ExistKey" value="true" />
+			</x:add>
+
+
+			<!-- Удалить секцию trace-->
+			<x:remove sel="/configuration/system.web/trace"/>
+			<!-- Удалить атрибут 'delayNotificationTimeout' в настройке httpRuntime-->
+			<x:remove sel="/configuration/system.web/httpRuntime/@delayNotificationTimeout"/>
+			<!-- Удалить настройку <add key='DataCacheLifeTimeMinute'/>-->
+			<x:remove sel="/configuration/appSettings/add[@key='DataCacheLifeTimeMinute']"/>
+
+			<!-- Заменить в настройке <add key='ConnectionName'> значение на 'Super Connection'-->
+			<x:replace sel="/configuration/appSettings/add[@key='ConnectionName']/@value">Super Connection</x:replace>
+			<!-- Заменить в настройке <add key='MaxThreadCount'> значение на '300', при отсутствии настройки ошибка-->
+			<x:replace sel="/configuration/appSettings/add[@key='MaxThreadCount']/@value" vital="true">300</x:replace>
+			<!-- Заменить настройку <add key="Period"/> на <add key="TimePeriod" value="120"/> -->
+			<x:replace sel="/configuration/appSettings/add[@key='Period']">
+				<add key="TimePeriod" value="120"/>
+			</x:replace>
+			
+
+			<x:replaceText sel="/configuration/system.web/sessionState[@mode='StateServer']/@stateConnectionString"
+				oldText="42424" newText="11111"/>
+			<!-- Не существующая настройка -->
+			<x:replaceText sel="/configuration/appSettings/add[@key='NotExistKey']/@value"
+				oldText="42424" newText="11111"/>
+			<!-- Пустая настройка -->
+			<x:replaceText sel="/configuration/appSettings/add[@key='EmptyKey']/@value"
+				oldText="42424" newText="11111"/>
+
+
+			<!-- Добавить атрибут 'newvalue' со значением 'Very Super Connection' в настройку <add key='ConnectionName'>-->
+			<x:addAttribute sel="/configuration/appSettings/add[@key='ConnectionName']" name="newvalue" value="Very Super Connection" overwrite="false"/>
+			<!-- Атрибут не добавляется (он уже существует), значение перезапишется -->
+			<x:addAttribute sel="/configuration/appSettings/add[@key='ConnectionName']" name="overwritevalue" value="true" overwrite="true"/>
+
+		</x:patch>
+
+		<x:patch targetVersion="1.2.0.1-1.4.0">
+			<x:add sel="configuration/appSettings" verify="/configuration/appSettings/add[@key='BillingConnectionKey']">
+				<add key="BillingConnectionKey" value="FORIS.Collection"/>
+			</x:add>
+			
+		</x:patch>
+
+		<x:patch targetVersion="1.0.0-1.4.0">
+
+			<!-- Настройка не добавляется, уже существует -->
+			<x:add sel="/configuration/appSettings" verify="configuration/appSettings/add[@key='ExistKey']">
+				<add key="ExistKey" value="true" />
+			</x:add>
+
+			<!-- Атрибут не добавляется, не существующая нода -->
+			<x:addAttribute sel="/configuration/appSettings/add[@key='NotExistKey']" name="newvalue" value="Very Super Connection" overwrite="false"/>
+			<!-- Атрибут не добавляется (он уже существует), значение останется прежним -->
+			<x:addAttribute sel="/configuration/appSettings/add[@key='TestKey']" name="value" value="2" overwrite="false"/>
+
+
+			<!-- Значение в настройке <add key='ExistKey'> не изменится, уже равно true -->
+			<x:replace sel="/configuration/appSettings/add[@key='ExistKey']/@value">true</x:replace>
+			<!-- Настройка <add key="ExistKey" value="true" /> не изменится, уже такая -->
+			<x:replace sel="/configuration/appSettings/add[@key='ExistKey']">
+				<add key="ExistKey" value="true" />
+			</x:replace>
+			
+			<!-- Значение в настройке <add key='ExistKey'> не изменится, уже равно true -->
+			<x:replace sel="/configuration/appSettings/add[@key='ExistKey']/@value">true</x:replace>
+			<!-- Настройка <add key="ExistKey" value="true" /> не изменится, уже такая -->
+			<x:replace sel="/configuration/appSettings/add[@key='ExistKey']">
+				<add key="ExistKey" value="true" />
+			</x:replace>
+
+		</x:patch>
+
+	</x:patches>
+
+</x:upgrade>

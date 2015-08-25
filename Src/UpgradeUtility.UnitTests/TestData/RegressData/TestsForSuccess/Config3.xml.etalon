@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<sectionGroup1>
+		<multiSection masterkey="1">
+			<myNode>1111</myNode>
+		</multiSection>
+		<multiSection masterkey="2">
+			<myNode>2222</myNode>
+		</multiSection>
+		<multiSection masterkey="3" node="1">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+		<multiSection masterkey="3" node="2">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+		<migrateSection>
+			<myNode>444</myNode>
+		</migrateSection>
+		<migrateNode value="migrateNode" />
+	</sectionGroup1>
+	<appSettings>
+		<add key="Path" value="C:\temp\русский.txt" />
+		<add key="TestReplace1" value="One Two Tree, РАЗЗ Два Три and ONE TWO TREE и РАЗ ДВА ТРИ" />
+		<add key="TestReplace2" value="onee Two Tree, Раз Два and onee TWO TREE и РАЗ ДВА" />
+	</appSettings>
+</configuration>

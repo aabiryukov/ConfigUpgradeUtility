@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<sectionGroup1>
+		<multiNotChangeSection masterkey="1">
+			<myNode>1111</myNode>
+		</multiNotChangeSection>
+		<multiNotChangeSection masterkey="2">
+			<myNode>2222</myNode>
+		</multiNotChangeSection>
+		<multiNotChangeSection masterkey="3" node="1">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiNotChangeSection>
+		<migrateNotChangeSection>
+			<myNode>444</myNode>
+		</migrateNotChangeSection>
+		<migrateNotChangeNode value="migrateNode" />
+	</sectionGroup1>
+	<appSettings />
+</configuration>

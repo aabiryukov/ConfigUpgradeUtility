@@ -1,0 +1,14 @@
+﻿<x:upgrade xmlns:x='http://sitronics.com/Deployment/UpgradeUtility' xmlns:t='http://sitronics.com/Test1'>
+
+	<x:settings overwriteVersion=''/>
+	<!-- Info: No migration changes.-->
+	<x:patches>
+		
+		<x:patch targetVersion='0-9'>
+			<!-- MUST THROW EXCEPTION: Target node does not exists -->
+			<x:transferValue sourceSel='/document' targetSel='/document/FakeNode'/>
+		</x:patch>
+
+	</x:patches>
+
+</x:upgrade>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<sectionGroup1>
+		<multiSection masterkey='1'>
+			<myNode>aaaa</myNode>
+		</multiSection>
+		<multiSection masterkey='2'>
+			<myNode>bbb</myNode>
+		</multiSection>
+		<multiSection masterkey='3'>
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+
+		<migrateSection>
+			<myNode>bbb</myNode>
+		</migrateSection>
+
+		<migrateNode value='migrateNode'/>
+	</sectionGroup1>
+
+	<appSettings>
+		<add key='ConnectionName' value=''/>
+	</appSettings>
+</configuration>

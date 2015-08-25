@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<section name="remoteWellKnownObjects" />
+	</configSections>
+	<sectionGroup1>
+		<multiSection masterkey="1">
+			<myNode>aaaa</myNode>
+		</multiSection>
+		<multiSection masterkey="2">
+			<myNode>bbb</myNode>
+		</multiSection>
+		<multiSection masterkey="3">
+			<myNode>ccc</myNode>
+			<myNode1>ccc</myNode1>
+			<myNode2>ccc</myNode2>
+		</multiSection>
+		<migrateSection>
+			<myNode>bbb</myNode>
+		</migrateSection>
+		<migrateNode value="migrateNode" />
+	</sectionGroup1>
+	<appSettings>
+		<add key="ConnectionName" value="Super Connection" overwritevalue="true" newvalue="Very Super Connection" />
+		<add key="MaxThreadCount" value="300" />
+		<add key="TestKey" value="1" />
+		<add key="ExistKey" value="true" />
+		<add key="EmptyKey" value="" />
+		<add key="BeforeRefreshTime" value="1" />
+		<add key="RefreshTime" value="2" />
+		<add key="AfterRefreshTime" value="3" />
+		<add key="TimePeriod" value="120" />
+		<add key="PerformanceCountersEnable" value="false" />
+		<add key="PerformanceCountersResetTimer" value="60" />
+		<add key="PerformanceCountersLogDirname" value="C:/PCLOG" />
+	</appSettings>
+	<system.web>
+		<httpRuntime maxRequestLength="65536" />
+		<!--  SESSION STATE SETTINGS
+		     StateServer session mode, need change 127.0.0.1 to state server address   -->
+		<sessionState mode="StateServer" stateConnectionString="tcpip=change_to_state_server_name:11111" cookieless="AutoDetect" timeout="20" />
+	</system.web>
+</configuration>
